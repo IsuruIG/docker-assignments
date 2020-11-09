@@ -1,0 +1,146 @@
+Last login: Mon Apr 27 21:57:26 on ttys000
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -it --name Ubuntu ubuntu:14.04 bash
+Unable to find image 'ubuntu:14.04' locally
+14.04: Pulling from library/ubuntu
+2e6e20c8e2e6: Pull complete 
+30bb187ac3fc: Pull complete 
+b7a5bcc4a58a: Pull complete 
+Digest: sha256:ffc76f71dd8be8c9e222d420dc96901a07b61616689a44c7b3ef6a10b7213de4
+Status: Downloaded newer image for ubuntu:14.04
+root@9b82dfd25be6:/# curl --version
+bash: curl: command not found
+root@9b82dfd25be6:/# apt-get update && apt-get install -y curl
+Get:1 http://security.ubuntu.com trusty-security InRelease [65.9 kB]
+Ign http://archive.ubuntu.com trusty InRelease         
+Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+Get:3 http://security.ubuntu.com trusty-security/main amd64 Packages [1032 kB]
+Get:4 https://esm.ubuntu.com trusty-infra-security InRelease                   
+Get:5 http://archive.ubuntu.com trusty-backports InRelease [65.9 kB]           
+Get:6 https://esm.ubuntu.com trusty-infra-updates InRelease        
+Get:7 https://esm.ubuntu.com trusty-infra-security/main amd64 Packages         
+Hit http://archive.ubuntu.com trusty Release.gpg                              
+Get:8 http://archive.ubuntu.com trusty-updates/main amd64 Packages [1460 kB]  
+Get:9 https://esm.ubuntu.com trusty-infra-updates/main amd64 Packages          
+Get:10 http://security.ubuntu.com trusty-security/restricted amd64 Packages [18.1 kB]
+Get:11 http://security.ubuntu.com trusty-security/universe amd64 Packages [377 kB]
+Get:12 http://security.ubuntu.com trusty-security/multiverse amd64 Packages [4730 B]
+Get:13 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [21.4 kB]
+Get:14 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [671 kB]
+Get:15 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [16.1 kB]
+Get:16 http://archive.ubuntu.com trusty-backports/main amd64 Packages [14.7 kB]
+Get:17 http://archive.ubuntu.com trusty-backports/restricted amd64 Packages [40 B]
+Get:18 http://archive.ubuntu.com trusty-backports/universe amd64 Packages [52.5 kB]
+Get:19 http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages [1392 B]
+Hit http://archive.ubuntu.com trusty Release                                   
+Get:20 http://archive.ubuntu.com trusty/main amd64 Packages [1743 kB]          
+Get:21 http://archive.ubuntu.com trusty/restricted amd64 Packages [16.0 kB]    
+Get:22 http://archive.ubuntu.com trusty/universe amd64 Packages [7589 kB]      
+Get:23 http://archive.ubuntu.com trusty/multiverse amd64 Packages [169 kB]     
+Fetched 13.7 MB in 49s (279 kB/s)                                              
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  libcurl3
+The following NEW packages will be installed:
+  curl libcurl3
+0 upgraded, 2 newly installed, 0 to remove and 1 not upgraded.
+Need to get 297 kB of archives.
+After this operation, 878 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libcurl3 amd64 7.35.0-1ubuntu2.20 [173 kB]
+Get:2 http://archive.ubuntu.com/ubuntu/ trusty-updates/main curl amd64 7.35.0-1ubuntu2.20 [123 kB]
+Fetched 297 kB in 2s (148 kB/s)
+Selecting previously unselected package libcurl3:amd64.
+(Reading database ... 12097 files and directories currently installed.)
+Preparing to unpack .../libcurl3_7.35.0-1ubuntu2.20_amd64.deb ...
+Unpacking libcurl3:amd64 (7.35.0-1ubuntu2.20) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.35.0-1ubuntu2.20_amd64.deb ...
+Unpacking curl (7.35.0-1ubuntu2.20) ...
+Setting up libcurl3:amd64 (7.35.0-1ubuntu2.20) ...
+Setting up curl (7.35.0-1ubuntu2.20) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.15) ...
+root@9b82dfd25be6:/# curl --version
+curl 7.35.0 (x86_64-pc-linux-gnu) libcurl/7.35.0 OpenSSL/1.0.1f zlib/1.2.8 libidn/1.28 librtmp/2.3
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtmp rtsp smtp smtps telnet tftp 
+Features: AsynchDNS GSS-Negotiate IDN IPv6 Largefile NTLM NTLM_WB SSL libz TLS-SRP 
+root@9b82dfd25be6:/# curl google.com
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+root@9b82dfd25be6:/# exit
+exit
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                          PORTS                NAMES
+9b82dfd25be6        ubuntu:14.04        "bash"                   5 minutes ago       Exited (0) About a minute ago                        Ubuntu
+be80e3b981b1        centos:7            "bash"                   8 minutes ago       Up 8 minutes                                         CentOS
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour                80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour                80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   5 hours ago         Up 2 hours                      0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm CentOS Ubuntu
+Ubuntu
+Error response from daemon: You cannot remove a running container be80e3b981b1ed5860934ee8c5ecc1c74ce1e38ccd558066c41c80a9e77f8a4c. Stop the container before attempting removal or force remove
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container -f rm CentOS Ubuntu
+unknown shorthand flag: 'f' in -f
+See 'docker container --help'.
+
+Usage:	docker container COMMAND
+
+Manage containers
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker container COMMAND --help' for more information on a command.
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm CentOS Ubuntu
+Error response from daemon: You cannot remove a running container be80e3b981b1ed5860934ee8c5ecc1c74ce1e38ccd558066c41c80a9e77f8a4c. Stop the container before attempting removal or force remove
+Error: No such container: Ubuntu
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+be80e3b981b1        centos:7            "bash"                   9 minutes ago       Up 9 minutes                             CentOS
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour    80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour    80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   5 hours ago         Up 2 hours          0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container stop CentOS
+CentOS
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm CentOS
+CentOS
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour    80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour    80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   5 hours ago         Up 2 hours          0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ 

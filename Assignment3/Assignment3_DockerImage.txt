@@ -1,0 +1,561 @@
+Last login: Tue Apr 28 15:30:47 on ttys002
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Isurus-MacBook-Pro:~ isurugunatileka$ cd Docker/udemy-docker-mastery/dockerfile-assignment-1/
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ ls
+Dockerfile	app.js		package.json	routes
+answer		bin		public		views
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ sublime app.js
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ sublime app.js
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build --help
+
+Usage:	docker image build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+Options:
+      --add-host list           Add a custom host-to-IP mapping (host:ip)
+      --build-arg list          Set build-time variables
+      --cache-from strings      Images to consider as cache sources
+      --cgroup-parent string    Optional parent cgroup for the container
+      --compress                Compress the build context using gzip
+      --cpu-period int          Limit the CPU CFS (Completely Fair Scheduler) period
+      --cpu-quota int           Limit the CPU CFS (Completely Fair Scheduler) quota
+  -c, --cpu-shares int          CPU shares (relative weight)
+      --cpuset-cpus string      CPUs in which to allow execution (0-3, 0,1)
+      --cpuset-mems string      MEMs in which to allow execution (0-3, 0,1)
+      --disable-content-trust   Skip image verification (default true)
+  -f, --file string             Name of the Dockerfile (Default is 'PATH/Dockerfile')
+      --force-rm                Always remove intermediate containers
+      --iidfile string          Write the image ID to the file
+      --isolation string        Container isolation technology
+      --label list              Set metadata for an image
+  -m, --memory bytes            Memory limit
+      --memory-swap bytes       Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+      --network string          Set the networking mode for the RUN instructions during build
+                                (default "default")
+      --no-cache                Do not use cache when building the image
+      --pull                    Always attempt to pull a newer version of the image
+  -q, --quiet                   Suppress the build output and print image ID on success
+      --rm                      Remove intermediate containers after a successful build (default true)
+      --security-opt strings    Security options
+      --shm-size bytes          Size of /dev/shm
+  -t, --tag list                Name and optionally a tag in the 'name:tag' format
+      --target string           Set the target build stage to build.
+      --ulimit ulimit           Ulimit options (default [])
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment
+"docker image build" requires exactly 1 argument.
+See 'docker image build --help'.
+
+Usage:  docker image build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/3 : FROM node:6.x-alpine
+manifest for node:6.x-alpine not found: manifest unknown: manifest unknown
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ clear
+
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Error response from daemon: Dockerfile parse error line 39: FROM requires either one or three arguments
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/3 : FROM node:alpine-6.x
+manifest for node:alpine-6.x not found: manifest unknown: manifest unknown
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ clear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/3 : FROM node:6.x-alpine
+manifest for node:6.x-alpine not found: manifest unknown: manifest unknown
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ ls
+Dockerfile	app.js		package.json	routes
+answer		bin		public		views
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/7 : FROM node:6-alpine
+6-alpine: Pulling from library/node
+bdf0201b3a05: Pull complete 
+e9fa13fdf0f5: Pull complete 
+ccc877228d8f: Pull complete 
+Digest: sha256:17258206fc9256633c7100006b1cfdf25b129b6a40b8e5d37c175026482c84e3
+Status: Downloaded newer image for node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/7 : RUN apk add --update tini
+ ---> Running in 15f5bc3b2722
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing tini (0.18.0-r0)
+Executing busybox-1.29.3-r10.trigger
+OK: 7 MiB in 17 packages
+Removing intermediate container 15f5bc3b2722
+ ---> 40e87ba55ee5
+Step 3/7 : WORKDIR /usr/src/app
+ ---> Running in 96bb7e325dbd
+Removing intermediate container 96bb7e325dbd
+ ---> c46d7df7810e
+Step 4/7 : COPY package.json package.json
+ ---> 55e1c5ba7eb4
+Step 5/7 : RUN npm install package.json \ && npm cache clean --force
+ ---> Running in dbc26656ccfe
+npm ERR! not a package /usr/src/app/package.json
+npm ERR! addLocal Could not install /usr/src/app/package.json
+npm ERR! Linux 4.19.76-linuxkit
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "package.json" " "
+npm ERR! node v6.17.1
+npm ERR! npm  v3.10.10
+npm ERR! path /tmp/npm-6-db49b0be/unpack-8466899e/package.json
+npm ERR! code ENOENT
+npm ERR! errno -2
+npm ERR! syscall open
+
+npm ERR! enoent ENOENT: no such file or directory, open '/tmp/npm-6-db49b0be/unpack-8466899e/package.json'
+npm ERR! enoent ENOENT: no such file or directory, open '/tmp/npm-6-db49b0be/unpack-8466899e/package.json'
+npm ERR! enoent This is most likely not a problem with npm itself
+npm ERR! enoent and is related to npm not being able to find a file.
+npm ERR! enoent 
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /usr/src/app/npm-debug.log
+The command '/bin/sh -c npm install package.json \ && npm cache clean --force' returned a non-zero code: 254
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ clear
+
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/7 : FROM node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/7 : RUN apk add --update tini
+ ---> Using cache
+ ---> 40e87ba55ee5
+Step 3/7 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> c46d7df7810e
+Step 4/7 : COPY package.json package.json
+ ---> Using cache
+ ---> 55e1c5ba7eb4
+Step 5/7 : RUN npm install \ && npm cache clean --force
+ ---> Running in c84164c56789
+npm ERR! Linux 4.19.76-linuxkit
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" " "
+npm ERR! node v6.17.1
+npm ERR! npm  v3.10.10
+npm ERR! code ENOSELF
+
+npm ERR! Refusing to install dockerfile-assignment-1 as a dependency of itself
+npm ERR! 
+npm ERR! If you need help, you may report this error at:
+npm ERR!     <https://github.com/npm/npm/issues>
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /usr/src/app/npm-debug.log
+The command '/bin/sh -c npm install \ && npm cache clean --force' returned a non-zero code: 1
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/7 : FROM node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/7 : RUN apk add --update tini
+ ---> Using cache
+ ---> 40e87ba55ee5
+Step 3/7 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> c46d7df7810e
+Step 4/7 : COPY package.json package.json
+ ---> Using cache
+ ---> 55e1c5ba7eb4
+Step 5/7 : RUN npm install && npm cache clean --force
+ ---> Running in 7d3b274ad7f9
+dockerfile-assignment-1@0.0.0 /usr/src/app
++-- body-parser@1.19.0 
+| +-- bytes@3.1.0 
+| +-- content-type@1.0.4 
+| +-- depd@1.1.2 
+| +-- http-errors@1.7.2 
+| | +-- inherits@2.0.3 
+| | `-- toidentifier@1.0.0 
+| +-- iconv-lite@0.4.24 
+| | `-- safer-buffer@2.1.2 
+| +-- on-finished@2.3.0 
+| | `-- ee-first@1.1.1 
+| +-- qs@6.7.0 
+| +-- raw-body@2.4.0 
+| | `-- unpipe@1.0.0 
+| `-- type-is@1.6.18 
+|   +-- media-typer@0.3.0 
+|   `-- mime-types@2.1.27 
+|     `-- mime-db@1.44.0 
++-- cookie-parser@1.4.5 
+| +-- cookie@0.4.0 
+| `-- cookie-signature@1.0.6 
++-- debug@2.6.9 
+| `-- ms@2.0.0 
++-- express@4.17.1 
+| +-- accepts@1.3.7 
+| | `-- negotiator@0.6.2 
+| +-- array-flatten@1.1.1 
+| +-- content-disposition@0.5.3 
+| +-- encodeurl@1.0.2 
+| +-- escape-html@1.0.3 
+| +-- etag@1.8.1 
+| +-- finalhandler@1.1.2 
+| +-- fresh@0.5.2 
+| +-- merge-descriptors@1.0.1 
+| +-- methods@1.1.2 
+| +-- parseurl@1.3.3 
+| +-- path-to-regexp@0.1.7 
+| +-- proxy-addr@2.0.6 
+| | +-- forwarded@0.1.2 
+| | `-- ipaddr.js@1.9.1 
+| +-- range-parser@1.2.1 
+| +-- safe-buffer@5.1.2 
+| +-- send@0.17.1 
+| | +-- destroy@1.0.4 
+| | +-- mime@1.6.0 
+| | `-- ms@2.1.1 
+| +-- serve-static@1.14.1 
+| +-- setprototypeof@1.1.1 
+| +-- statuses@1.5.0 
+| +-- utils-merge@1.0.1 
+| `-- vary@1.1.2 
++-- hbs@4.0.6 
+| +-- handlebars@4.3.5 
+| | +-- neo-async@2.6.1 
+| | +-- optimist@0.6.1 
+| | | +-- minimist@0.0.10 
+| | | `-- wordwrap@0.0.3 
+| | +-- source-map@0.6.1 
+| | `-- uglify-js@3.9.1 
+| |   `-- commander@2.20.3 
+| `-- walk@2.3.14 
+|   `-- foreachasync@3.0.0 
++-- morgan@1.10.0 
+| +-- basic-auth@2.0.1 
+| +-- depd@2.0.0 
+| `-- on-headers@1.0.2 
+`-- serve-favicon@2.5.0 
+  +-- ms@2.1.1 
+  `-- safe-buffer@5.1.1 
+
+npm WARN using --force I sure hope you know what you are doing.
+Removing intermediate container 7d3b274ad7f9
+ ---> 6db74209db15
+Step 6/7 : COPY app.js app.js
+ ---> 3faf4fecbfed
+Step 7/7 : CMD ["/sbin/tini", "-- node", "./bin/www"]
+ ---> Running in e2d61cb4046b
+Removing intermediate container e2d61cb4046b
+ ---> 27e362ffb480
+Successfully built 27e362ffb480
+Successfully tagged node_assignment:latest
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image ls
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+node_assignment          latest              27e362ffb480        10 seconds ago      64.1MB
+isuruig/nginx_w_html     latest              993da78236d6        45 minutes ago      127MB
+nginx_w_html             latest              993da78236d6        45 minutes ago      127MB
+customnginx              latest              7faba12b67a3        52 minutes ago      108MB
+<none>                   <none>              8fb953deef0f        53 minutes ago      108MB
+mongo                    latest              3f3daf863757        3 days ago          388MB
+nginx                    alpine              89ec9da68213        3 days ago          19.9MB
+ubuntu                   latest              1d622ef86b13        4 days ago          73.9MB
+alpine                   3.10                be4e4bea2c2e        4 days ago          5.58MB
+alpine                   latest              f70734b6a266        4 days ago          5.61MB
+nginx                    latest              602e111c06b6        4 days ago          127MB
+isuruig/nginx            latest              602e111c06b6        4 days ago          127MB
+isuruig/nginx            testing             602e111c06b6        4 days ago          127MB
+mysql                    latest              0c27e8e5fcfa        5 days ago          546MB
+httpd                    latest              b2c2ab6dcf2e        5 days ago          166MB
+debian                   stretch-slim        6983eeff8f9b        5 days ago          55.3MB
+centos                   latest              470671670cac        3 months ago        237MB
+ubuntu                   14.04               6e4f1fe62ff1        4 months ago        197MB
+centos                   7                   5e35e350aded        5 months ago        203MB
+node                     6-alpine            dfc29bfa7d41        12 months ago       56.1MB
+elasticsearch            2                   5e9d896dc62c        20 months ago       479MB
+justincormack/nsenter1   latest              c81481184b1b        2 years ago         101kB
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.4kB
+Step 1/8 : FROM node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/8 : RUN apk add --update tini
+ ---> Using cache
+ ---> 40e87ba55ee5
+Step 3/8 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> c46d7df7810e
+Step 4/8 : COPY package.json package.json
+ ---> Using cache
+ ---> 55e1c5ba7eb4
+Step 5/8 : RUN npm install && npm cache clean --force
+ ---> Using cache
+ ---> 6db74209db15
+Step 6/8 : COPY app.js app.js
+ ---> Using cache
+ ---> 3faf4fecbfed
+Step 7/8 : EXPOSE 80 3000
+ ---> Running in efcbbba947d3
+Removing intermediate container efcbbba947d3
+ ---> 6e44bc0ea991
+Step 8/8 : CMD ["/sbin/tini", "-- node", "./bin/www"]
+ ---> Running in d021747ea591
+Removing intermediate container d021747ea591
+ ---> ddda5831b437
+Successfully built ddda5831b437
+Successfully tagged node_assignment:latest
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker container run -p 3000:80 --name node_cont node_assignment
+/sbin/tini: unrecognized option: -
+tini (tini version 0.18.0)
+Usage: tini [OPTIONS] PROGRAM -- [ARGS] | --version
+
+Execute a program under the supervision of a valid init process (tini)
+
+Command line options:
+
+  --version: Show version and exit.
+  -h: Show this help message and exit.
+  -s: Register as a process subreaper (requires Linux >= 3.4).
+  -p SIGNAL: Trigger SIGNAL when parent dies, e.g. "-p SIGKILL".
+  -v: Generate more verbose output. Repeat up to 3 times.
+  -w: Print a warning when processes are getting reaped.
+  -g: Send signals to the child's process group.
+  -e EXIT_CODE: Remap EXIT_CODE (from 0 to 255) to 0.
+  -l: Show license and exit.
+
+Environment variables:
+
+  TINI_SUBREAPER: Register as a process subreaper (requires Linux >= 3.4).
+  TINI_VERBOSITY: Set the verbosity level (default: 1).
+  TINI_KILL_PROCESS_GROUP: Send signals to the child's process group.
+
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image build -t node_assignment .
+Sending build context to Docker daemon  443.9kB
+Step 1/9 : FROM node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/9 : EXPOSE 3000
+ ---> Running in 836de8d3ccd2
+Removing intermediate container 836de8d3ccd2
+ ---> 6f19a930eb74
+Step 3/9 : RUN apk add --update tini
+ ---> Running in ee90e5b3c240
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/1) Installing tini (0.18.0-r0)
+Executing busybox-1.29.3-r10.trigger
+OK: 7 MiB in 17 packages
+Removing intermediate container ee90e5b3c240
+ ---> 05fb0e9a2500
+Step 4/9 : RUN mkdir -p usr/src/app
+ ---> Running in 3526791c3b90
+Removing intermediate container 3526791c3b90
+ ---> 8d7aa468e0ff
+Step 5/9 : WORKDIR /usr/src/app
+ ---> Running in bb5827cc5f3c
+Removing intermediate container bb5827cc5f3c
+ ---> 954c1f0ce61e
+Step 6/9 : COPY package.json package.json
+ ---> 216b6199f6db
+Step 7/9 : RUN npm install && npm cache clean --force
+ ---> Running in ca2e2501ad9a
+dockerfile-assignment-1@0.0.0 /usr/src/app
++-- body-parser@1.19.0 
+| +-- bytes@3.1.0 
+| +-- content-type@1.0.4 
+| +-- depd@1.1.2 
+| +-- http-errors@1.7.2 
+| | +-- inherits@2.0.3 
+| | `-- toidentifier@1.0.0 
+| +-- iconv-lite@0.4.24 
+| | `-- safer-buffer@2.1.2 
+| +-- on-finished@2.3.0 
+| | `-- ee-first@1.1.1 
+| +-- qs@6.7.0 
+| +-- raw-body@2.4.0 
+| | `-- unpipe@1.0.0 
+| `-- type-is@1.6.18 
+|   +-- media-typer@0.3.0 
+|   `-- mime-types@2.1.27 
+|     `-- mime-db@1.44.0 
++-- cookie-parser@1.4.5 
+| +-- cookie@0.4.0 
+| `-- cookie-signature@1.0.6 
++-- debug@2.6.9 
+| `-- ms@2.0.0 
++-- express@4.17.1 
+| +-- accepts@1.3.7 
+| | `-- negotiator@0.6.2 
+| +-- array-flatten@1.1.1 
+| +-- content-disposition@0.5.3 
+| +-- encodeurl@1.0.2 
+| +-- escape-html@1.0.3 
+| +-- etag@1.8.1 
+| +-- finalhandler@1.1.2 
+| +-- fresh@0.5.2 
+| +-- merge-descriptors@1.0.1 
+| +-- methods@1.1.2 
+| +-- parseurl@1.3.3 
+| +-- path-to-regexp@0.1.7 
+| +-- proxy-addr@2.0.6 
+| | +-- forwarded@0.1.2 
+| | `-- ipaddr.js@1.9.1 
+| +-- range-parser@1.2.1 
+| +-- safe-buffer@5.1.2 
+| +-- send@0.17.1 
+| | +-- destroy@1.0.4 
+| | +-- mime@1.6.0 
+| | `-- ms@2.1.1 
+| +-- serve-static@1.14.1 
+| +-- setprototypeof@1.1.1 
+| +-- statuses@1.5.0 
+| +-- utils-merge@1.0.1 
+| `-- vary@1.1.2 
++-- hbs@4.0.6 
+| +-- handlebars@4.3.5 
+| | +-- neo-async@2.6.1 
+| | +-- optimist@0.6.1 
+| | | +-- minimist@0.0.10 
+| | | `-- wordwrap@0.0.3 
+| | +-- source-map@0.6.1 
+| | `-- uglify-js@3.9.1 
+| |   `-- commander@2.20.3 
+| `-- walk@2.3.14 
+|   `-- foreachasync@3.0.0 
++-- morgan@1.10.0 
+| +-- basic-auth@2.0.1 
+| +-- depd@2.0.0 
+| `-- on-headers@1.0.2 
+`-- serve-favicon@2.5.0 
+  +-- ms@2.1.1 
+  `-- safe-buffer@5.1.1 
+
+npm WARN using --force I sure hope you know what you are doing.
+Removing intermediate container ca2e2501ad9a
+ ---> c4372131a34c
+Step 8/9 : COPY . .
+ ---> c73c4f7d71b8
+Step 9/9 : CMD ["/sbin/tini", "--", "node", "./bin/www"]
+ ---> Running in 7b74274869c4
+Removing intermediate container 7b74274869c4
+ ---> 2ebce73a5ac7
+Successfully built 2ebce73a5ac7
+Successfully tagged node_assignment:latest
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker container run -p 80:3000 --name node_cont node_assignment --rm
+docker: Error response from daemon: Conflict. The container name "/node_cont" is already in use by container "175e9656459c1545f8839d3a7a57aa78c2ba6a916ad91275ce7923a83facc6ad". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker container run -p 80:3000 --name test node_assignment
+GET / 200 113.282 ms - 290
+GET /stylesheets/style.css 200 15.511 ms - 111
+GET /images/picard.gif 200 17.354 ms - 417700
+^CIsurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image ls
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+node_assignment          latest              2ebce73a5ac7        2 minutes ago       64.5MB
+<none>                   <none>              ddda5831b437        47 minutes ago      64.1MB
+<none>                   <none>              27e362ffb480        48 minutes ago      64.1MB
+isuruig/nginx_w_html     latest              993da78236d6        2 hours ago         127MB
+nginx_w_html             latest              993da78236d6        2 hours ago         127MB
+customnginx              latest              7faba12b67a3        2 hours ago         108MB
+<none>                   <none>              8fb953deef0f        2 hours ago         108MB
+mongo                    latest              3f3daf863757        3 days ago          388MB
+nginx                    alpine              89ec9da68213        3 days ago          19.9MB
+ubuntu                   latest              1d622ef86b13        4 days ago          73.9MB
+alpine                   3.10                be4e4bea2c2e        4 days ago          5.58MB
+alpine                   latest              f70734b6a266        4 days ago          5.61MB
+isuruig/nginx            latest              602e111c06b6        4 days ago          127MB
+isuruig/nginx            testing             602e111c06b6        4 days ago          127MB
+nginx                    latest              602e111c06b6        4 days ago          127MB
+mysql                    latest              0c27e8e5fcfa        5 days ago          546MB
+httpd                    latest              b2c2ab6dcf2e        5 days ago          166MB
+debian                   stretch-slim        6983eeff8f9b        5 days ago          55.3MB
+centos                   latest              470671670cac        3 months ago        237MB
+ubuntu                   14.04               6e4f1fe62ff1        4 months ago        197MB
+centos                   7                   5e35e350aded        5 months ago        203MB
+node                     6-alpine            dfc29bfa7d41        12 months ago       56.1MB
+elasticsearch            2                   5e9d896dc62c        20 months ago       479MB
+justincormack/nsenter1   latest              c81481184b1b        2 years ago         101kB
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image tag 
+.dockerignore  .vscode/       answer/        bin/           public/        views/
+.gitignore     Dockerfile     app.js         package.json   routes/        
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image tag node_assignment isuruig/node_assignment
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ dcoker push isuruig/node_assignment
+-bash: dcoker: command not found
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker push isuruig/node_assignment
+The push refers to repository [docker.io/isuruig/node_assignment]
+58a8f6a688b9: Pushed 
+9a17efb0a7bc: Pushed 
+4e1ba6985a5c: Pushed 
+4a5fef87b178: Pushed 
+65c4850bd506: Pushed 
+f168d52a989d: Mounted from library/node 
+17b7c23fba03: Mounted from library/node 
+a464c54f93a9: Mounted from library/node 
+latest: digest: sha256:5227e5c677b3f62746cca206e2bfb0ace29177895090e6fd497b1a4700626ad4 size: 1997
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image ls
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+isuruig/node_assignment   latest              2ebce73a5ac7        5 minutes ago       64.5MB
+node_assignment           latest              2ebce73a5ac7        5 minutes ago       64.5MB
+<none>                    <none>              ddda5831b437        50 minutes ago      64.1MB
+<none>                    <none>              27e362ffb480        51 minutes ago      64.1MB
+isuruig/nginx_w_html      latest              993da78236d6        2 hours ago         127MB
+nginx_w_html              latest              993da78236d6        2 hours ago         127MB
+customnginx               latest              7faba12b67a3        2 hours ago         108MB
+<none>                    <none>              8fb953deef0f        2 hours ago         108MB
+mongo                     latest              3f3daf863757        3 days ago          388MB
+nginx                     alpine              89ec9da68213        3 days ago          19.9MB
+ubuntu                    latest              1d622ef86b13        4 days ago          73.9MB
+alpine                    3.10                be4e4bea2c2e        4 days ago          5.58MB
+alpine                    latest              f70734b6a266        4 days ago          5.61MB
+isuruig/nginx             latest              602e111c06b6        4 days ago          127MB
+isuruig/nginx             testing             602e111c06b6        4 days ago          127MB
+nginx                     latest              602e111c06b6        4 days ago          127MB
+mysql                     latest              0c27e8e5fcfa        5 days ago          546MB
+httpd                     latest              b2c2ab6dcf2e        5 days ago          166MB
+debian                    stretch-slim        6983eeff8f9b        5 days ago          55.3MB
+centos                    latest              470671670cac        3 months ago        237MB
+ubuntu                    14.04               6e4f1fe62ff1        4 months ago        197MB
+centos                    7                   5e35e350aded        5 months ago        203MB
+node                      6-alpine            dfc29bfa7d41        12 months ago       56.1MB
+elasticsearch             2                   5e9d896dc62c        20 months ago       479MB
+justincormack/nsenter1    latest              c81481184b1b        2 years ago         101kB
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image rm 
+.dockerignore  .vscode/       answer/        bin/           public/        views/
+.gitignore     Dockerfile     app.js         package.json   routes/        
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker image rm isuruig/node_assignment
+Untagged: isuruig/node_assignment:latest
+Untagged: isuruig/node_assignment@sha256:5227e5c677b3f62746cca206e2bfb0ace29177895090e6fd497b1a4700626ad4
+Isurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ docker container run --rm -p 80:3000 isuruig/node_assignment
+Unable to find image 'isuruig/node_assignment:latest' locally
+latest: Pulling from isuruig/node_assignment
+Digest: sha256:5227e5c677b3f62746cca206e2bfb0ace29177895090e6fd497b1a4700626ad4
+Status: Downloaded newer image for isuruig/node_assignment:latest
+GET / 304 87.892 ms - -
+GET /stylesheets/style.css 304 4.888 ms - -
+GET /images/picard.gif 304 5.121 ms - -
+GET / 304 10.310 ms - -
+GET /stylesheets/style.css 304 0.934 ms - -
+GET /images/picard.gif 304 0.766 ms - -
+GET / 304 10.369 ms - -
+GET /stylesheets/style.css 304 1.079 ms - -
+GET /images/picard.gif 304 1.740 ms - -
+^CIsurus-MacBook-Pro:dockerfile-assignment-1 isurugunatileka$ 

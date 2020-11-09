@@ -1,0 +1,76 @@
+Last login: Mon Apr 27 16:20:15 on ttys001
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d -p 3300:3306 --name database -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+8a1d3888284fb785c5c890895998a93d5a94b88c23cd3dcc5bf8802fcf30232b
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d -p 80:80 --name webhost_nginx nginx
+243e7efa8b5fd8f5b7062b0fe91c657150155b0b71779f5bdbb65e256525dcc3
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d -p 8080:80 --name apache httpd
+534def6d75320e2beda02dded1560f16661e7840e70a9d81f0e47d41bed82a8d
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                               NAMES
+534def6d7532        httpd               "httpd-foreground"       13 seconds ago       Up 12 seconds       0.0.0.0:8080->80/tcp                apache
+243e7efa8b5f        nginx               "nginx -g 'daemon of…"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp                  webhost_nginx
+8a1d3888284f        mysql               "docker-entrypoint.s…"   About a minute ago   Up About a minute   33060/tcp, 0.0.0.0:3300->3306/tcp   database
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container logs webhost_nginx
+172.17.0.1 - - [27/Apr/2020:10:54:39 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36" "-"
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container logs apache
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.4. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.17.0.4. Set the 'ServerName' directive globally to suppress this message
+[Mon Apr 27 10:54:13.488174 2020] [mpm_event:notice] [pid 1:tid 140713612838016] AH00489: Apache/2.4.43 (Unix) configured -- resuming normal operations
+[Mon Apr 27 10:54:13.488487 2020] [core:notice] [pid 1:tid 140713612838016] AH00094: Command line: 'httpd -D FOREGROUND'
+172.17.0.1 - - [27/Apr/2020:10:55:07 +0000] "GET / HTTP/1.1" 304 -
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container logs database
+2020-04-27 10:52:50+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.19-1debian10 started.
+2020-04-27 10:52:50+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2020-04-27 10:52:50+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.19-1debian10 started.
+2020-04-27 10:52:51+00:00 [Note] [Entrypoint]: Initializing database files
+2020-04-27T10:52:51.041995Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+2020-04-27T10:52:51.042063Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.19) initializing of server in progress as process 44
+2020-04-27T10:52:52.888989Z 5 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2020-04-27 10:52:55+00:00 [Note] [Entrypoint]: Database files initialized
+2020-04-27 10:52:55+00:00 [Note] [Entrypoint]: Starting temporary server
+2020-04-27T10:52:55.708296Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+2020-04-27T10:52:55.708408Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.19) starting as process 94
+2020-04-27T10:52:56.304186Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2020-04-27T10:52:56.306467Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2020-04-27T10:52:56.326772Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.19'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+2020-04-27 10:52:56+00:00 [Note] [Entrypoint]: Temporary server started.
+2020-04-27T10:52:56.421178Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock'
+Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+2020-04-27 10:53:00+00:00 [Note] [Entrypoint]: GENERATED ROOT PASSWORD: Aiphee5Ahtie7Foo3ooma3wiloobei6U
+
+2020-04-27 10:53:00+00:00 [Note] [Entrypoint]: Stopping temporary server
+2020-04-27T10:53:00.245914Z 10 [System] [MY-013172] [Server] Received SHUTDOWN from user root. Shutting down mysqld (Version: 8.0.19).
+2020-04-27T10:53:01.397789Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.19)  MySQL Community Server - GPL.
+2020-04-27 10:53:02+00:00 [Note] [Entrypoint]: Temporary server stopped
+
+2020-04-27 10:53:02+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
+
+2020-04-27T10:53:02.548498Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+2020-04-27T10:53:02.548604Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.19) starting as process 1
+2020-04-27T10:53:02.927111Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2020-04-27T10:53:02.930332Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2020-04-27T10:53:02.947598Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.19'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+2020-04-27T10:53:03.102488Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
+534def6d7532        httpd               "httpd-foreground"       2 minutes ago       Up 2 minutes        0.0.0.0:8080->80/tcp                apache
+243e7efa8b5f        nginx               "nginx -g 'daemon of…"   3 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp                  webhost_nginx
+8a1d3888284f        mysql               "docker-entrypoint.s…"   3 minutes ago       Up 3 minutes        33060/tcp, 0.0.0.0:3300->3306/tcp   database
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm -f database wenhost_nginx apache
+database
+apache
+Error: No such container: wenhost_nginx
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm -f webhost_nginx
+webhost_nginx
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+Isurus-MacBook-Pro:~ isurugunatileka$ 

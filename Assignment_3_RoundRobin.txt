@@ -1,0 +1,341 @@
+Last login: Tue Apr 28 00:06:44 on ttys002
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d --net search_net -network-alias search elasticsearch:2
+unknown shorthand flag: 'n' in -network-alias
+See 'docker container run --help'.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d --net search_net -\-network-alias search elasticsearch:2
+0472194b0fba830b3ddd508f1a4651f778df73949f0f7084dc6cb0155bfa8552
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -d --net search_net -\-network-alias search elasticsearch:2
+a0fd5b6162d2919bfa932385e2a4d913c09f7025ebc6d5500d353647ef8ad2ba
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+a0fd5b6162d2        elasticsearch:2     "/docker-entrypoint.…"   10 seconds ago      Up 9 seconds        9200/tcp, 9300/tcp   distracted_mclean
+0472194b0fba        elasticsearch:2     "/docker-entrypoint.…"   12 seconds ago      Up 11 seconds       9200/tcp, 9300/tcp   wizardly_bardeen
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   2 hours ago         Up 2 hours          80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   2 hours ago         Up 2 hours          80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   6 hours ago         Up 2 hours          0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ clear
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net alpine nslookup search  
+Server:		127.0.0.11
+Address:	127.0.0.11:53
+
+Non-authoritative answer:
+
+Non-authoritative answer:
+Name:	search
+Address: 172.19.0.3
+Name:	search
+Address: 172.19.0.2
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net alpine nslookup search.  
+Server:		127.0.0.11
+Address:	127.0.0.11:53
+
+Non-authoritative answer:
+Name:	search
+Address: 172.19.0.2
+Name:	search
+Address: 172.19.0.3
+
+Non-authoritative answer:
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net alpine:3.10 nslookup search  
+Unable to find image 'alpine:3.10' locally
+3.10: Pulling from library/alpine
+21c83c524219: Pull complete 
+Digest: sha256:f0e9534a598e501320957059cb2a23774b4d4072e37c7b2cf7e95b241f019e35
+Status: Downloaded newer image for alpine:3.10
+
+nslookup: can't resolve '(null)': Name does not resolve
+Name:      search
+Address 1: 172.19.0.2 search.search_net
+Address 2: 172.19.0.3 search.search_net
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -rm --net search_net centos curl -s search:9200
+unknown shorthand flag: 'r' in -rm
+See 'docker container run --help'.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200 
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+8a29a15cefae: Pull complete 
+Digest: sha256:fe8d824220415eed5477b63addf40fb06c3b049404242b31982106ac204f6700
+Status: Downloaded newer image for centos:latest
+{
+  "name" : "Nimrod",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "rgGy67E0Q9miV0tJl3Jzwg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Nimrod",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "rgGy67E0Q9miV0tJl3Jzwg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Nimrod",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "rgGy67E0Q9miV0tJl3Jzwg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Nimrod",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "rgGy67E0Q9miV0tJl3Jzwg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Unicorn",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-XOiIkNiR-iPAZF50G-7mQ",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run --rm --net search_net centos curl -s search:9200
+{
+  "name" : "Nimrod",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "rgGy67E0Q9miV0tJl3Jzwg",
+  "version" : {
+    "number" : "2.4.6",
+    "build_hash" : "5376dca9f70f3abef96a77f4bb22720ace8240fd",
+    "build_timestamp" : "2017-07-18T12:17:44Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+a0fd5b6162d2        elasticsearch:2     "/docker-entrypoint.…"   9 minutes ago       Up 9 minutes        9200/tcp, 9300/tcp   distracted_mclean
+0472194b0fba        elasticsearch:2     "/docker-entrypoint.…"   9 minutes ago       Up 9 minutes        9200/tcp, 9300/tcp   wizardly_bardeen
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   2 hours ago         Up 2 hours          80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   2 hours ago         Up 2 hours          80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   6 hours ago         Up 2 hours          0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container -f -rm 
+.CFUserTextEncoding           .docker/                      .netbeans-derby/              2020-153/                     PhpstormProjects/
+.DS_Store                     .eclipse/                     .npm/                         Applications/                 Pictures/
+.Trash/                       .emulator_console_auth_token  .oracle_jre_usage/            Desktop/                      Postman/
+.android/                     .gitconfig                    .p2/                          Docker/                       Public/
+.bash_history                 .gitflow_export               .sqlite_history               Documents/                    Research2020/
+.bash_profile                 .gitignore_global             .stCommitMsg                  Downloads/                    eclipse/
+.bash_sessions/               .gradle/                      .subversion/                  Google Drive/                 eclipse-workspace/
+.cache/                       .hgignore_global              .tooling/                     Library/                      node_modules/
+.config/                      .idlerc/                      .viminfo                      Movies/                       package-lock.json
+.dart/                        .local/                       .vscode/                      Music/                        
+.dartServer/                  .m2/                          .zsh_history                  NetBeansProjects/             
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container -f -rm 
+.CFUserTextEncoding           .docker/                      .netbeans-derby/              2020-153/                     PhpstormProjects/
+.DS_Store                     .eclipse/                     .npm/                         Applications/                 Pictures/
+.Trash/                       .emulator_console_auth_token  .oracle_jre_usage/            Desktop/                      Postman/
+.android/                     .gitconfig                    .p2/                          Docker/                       Public/
+.bash_history                 .gitflow_export               .sqlite_history               Documents/                    Research2020/
+.bash_profile                 .gitignore_global             .stCommitMsg                  Downloads/                    eclipse/
+.bash_sessions/               .gradle/                      .subversion/                  Google Drive/                 eclipse-workspace/
+.cache/                       .hgignore_global              .tooling/                     Library/                      node_modules/
+.config/                      .idlerc/                      .viminfo                      Movies/                       package-lock.json
+.dart/                        .local/                       .vscode/                      Music/                        
+.dartServer/                  .m2/                          .zsh_history                  NetBeansProjects/             
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container -f -rm distracted_mclean wizardly_bardeen
+unknown shorthand flag: 'f' in -f
+See 'docker container --help'.
+
+Usage:	docker container COMMAND
+
+Manage containers
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker container COMMAND --help' for more information on a command.
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container -f rm distracted_mclean wizardly_bardeen
+unknown shorthand flag: 'f' in -f
+See 'docker container --help'.
+
+Usage:	docker container COMMAND
+
+Manage containers
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker container COMMAND --help' for more information on a command.
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm -f distracted_mclean wizardly_bardeen
+distracted_mclean
+wizardly_bardeen
+Isurus-MacBook-Pro:~ isurugunatileka$ 

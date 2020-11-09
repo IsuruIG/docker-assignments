@@ -1,0 +1,193 @@
+Last login: Mon Apr 27 23:25:07 on ttys000
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container run -it -d --name CentOS centos:7 bash
+Unable to find image 'centos:7' locally
+7: Pulling from library/centos
+ab5ef0e58194: Pull complete 
+Digest: sha256:4a701376d03f6b39b8c2a8f4a8e499441b0d567f9ab9d58e4991de4472fb813c
+Status: Downloaded newer image for centos:7
+be80e3b981b1ed5860934ee8c5ecc1c74ce1e38ccd558066c41c80a9e77f8a4c
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container exec -it CentOS bash 
+[root@be80e3b981b1 /]# curl --version
+curl 7.29.0 (x86_64-redhat-linux-gnu) libcurl/7.29.0 NSS/3.36 zlib/1.2.7 libidn/1.28 libssh2/1.4.3
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp scp sftp smtp smtps telnet tftp 
+Features: AsynchDNS GSS-Negotiate IDN IPv6 Largefile NTLM NTLM_WB SSL libz unix-sockets 
+[root@be80e3b981b1 /]# yum update curl
+Loaded plugins: fastestmirror, ovl
+Determining fastest mirrors
+ * base: mirrors.praction.in
+ * extras: mirrors.praction.in
+ * updates: mirrors.praction.in
+base                                                                                 | 3.6 kB  00:00:00     
+extras                                                                               | 2.9 kB  00:00:00     
+updates                                                                              | 2.9 kB  00:00:00     
+(1/4): extras/7/x86_64/primary_db                                                    | 165 kB  00:00:00     
+(2/4): updates/7/x86_64/primary_db                                                   | 120 kB  00:00:01     
+(3/4): base/7/x86_64/group_gz                                                        | 153 kB  00:00:02     
+(4/4): base/7/x86_64/primary_db                                                      | 6.1 MB  00:00:23     
+Resolving Dependencies
+--> Running transaction check
+---> Package curl.x86_64 0:7.29.0-54.el7 will be updated
+---> Package curl.x86_64 0:7.29.0-57.el7 will be an update
+--> Processing Dependency: libcurl = 7.29.0-57.el7 for package: curl-7.29.0-57.el7.x86_64
+--> Running transaction check
+---> Package libcurl.x86_64 0:7.29.0-54.el7 will be updated
+---> Package libcurl.x86_64 0:7.29.0-57.el7 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+============================================================================================================
+ Package                 Arch                   Version                          Repository            Size
+============================================================================================================
+Updating:
+ curl                    x86_64                 7.29.0-57.el7                    base                 270 k
+Updating for dependencies:
+ libcurl                 x86_64                 7.29.0-57.el7                    base                 223 k
+
+Transaction Summary
+============================================================================================================
+Upgrade  1 Package (+1 Dependent package)
+
+Total download size: 493 k
+Is this ok [y/d/N]: y
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+warning: /var/cache/yum/x86_64/7/base/packages/libcurl-7.29.0-57.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Public key for libcurl-7.29.0-57.el7.x86_64.rpm is not installed
+(1/2): libcurl-7.29.0-57.el7.x86_64.rpm                                              | 223 kB  00:00:02     
+(2/2): curl-7.29.0-57.el7.x86_64.rpm                                                 | 270 kB  00:00:03     
+------------------------------------------------------------------------------------------------------------
+Total                                                                       143 kB/s | 493 kB  00:00:03     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-7.1908.0.el7.centos.x86_64 (@CentOS)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : libcurl-7.29.0-57.el7.x86_64                                                             1/4 
+  Updating   : curl-7.29.0-57.el7.x86_64                                                                2/4 
+  Cleanup    : curl-7.29.0-54.el7.x86_64                                                                3/4 
+  Cleanup    : libcurl-7.29.0-54.el7.x86_64                                                             4/4 
+  Verifying  : curl-7.29.0-57.el7.x86_64                                                                1/4 
+  Verifying  : libcurl-7.29.0-57.el7.x86_64                                                             2/4 
+  Verifying  : libcurl-7.29.0-54.el7.x86_64                                                             3/4 
+  Verifying  : curl-7.29.0-54.el7.x86_64                                                                4/4 
+
+Updated:
+  curl.x86_64 0:7.29.0-57.el7                                                                               
+
+Dependency Updated:
+  libcurl.x86_64 0:7.29.0-57.el7                                                                            
+
+Complete!
+[root@be80e3b981b1 /]# curl --version
+curl 7.29.0 (x86_64-redhat-linux-gnu) libcurl/7.29.0 NSS/3.44 zlib/1.2.7 libidn/1.28 libssh2/1.8.0
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp scp sftp smtp smtps telnet tftp 
+Features: AsynchDNS GSS-Negotiate IDN IPv6 Largefile NTLM NTLM_WB SSL libz unix-sockets 
+[root@be80e3b981b1 /]# curl google.com
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+[root@be80e3b981b1 /]# exit
+exit
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+9b82dfd25be6        ubuntu:14.04        "bash"                   2 minutes ago       Up 2 minutes                             Ubuntu
+be80e3b981b1        centos:7            "bash"                   5 minutes ago       Up 5 minutes                             CentOS
+c32a90fa9707        nginx               "nginx -g 'daemon of…"   59 minutes ago      Up 59 minutes       80/tcp               ngnix_my_app_net_2
+9bb9a918d755        nginx               "nginx -g 'daemon of…"   About an hour ago   Up About an hour    80/tcp               nginx_my_app_net
+96656092d02a        nginx:alpine        "nginx -g 'daemon of…"   5 hours ago         Up About an hour    0.0.0.0:80->80/tcp   nginx_net
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container --rm --help
+unknown flag: --rm
+See 'docker container --help'.
+
+Usage:	docker container COMMAND
+
+Manage containers
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker container COMMAND --help' for more information on a command.
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container --rm
+unknown flag: --rm
+See 'docker container --help'.
+
+Usage:	docker container COMMAND
+
+Manage containers
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker container COMMAND --help' for more information on a command.
+
+Isurus-MacBook-Pro:~ isurugunatileka$ docker container rm
+"docker container rm" requires at least 1 argument.
+See 'docker container rm --help'.
+
+Usage:  docker container rm [OPTIONS] CONTAINER [CONTAINER...]
+
+Remove one or more containers
+Isurus-MacBook-Pro:~ isurugunatileka$ 
